@@ -14,14 +14,23 @@ class ProblemImporter(factory: RequestFactory, id: String, private val rootFolde
     private val sampleMarker = MarkSample(factory, id)
 
     fun import() {
-        val layout = generateProblemLayout()
+        for (i in 1..10) {
+            try {
+                val layout = generateProblemLayout()
 
-        uploadTests(layout)
-        uploadSolutions(layout)
-        uploadStatement(layout)
-        uploadChecker(layout)
-        uploadValidator(layout)
-        markSampleTests(layout)
+                println(layout)
+
+                uploadTests(layout)
+                uploadSolutions(layout)
+                uploadStatement(layout)
+                uploadChecker(layout)
+                uploadValidator(layout)
+                markSampleTests(layout)
+                break
+            } catch (e: Throwable) {
+                continue
+            }
+        }
 
         // TODO: tl, ml, comment, solution tags
     }
