@@ -1,0 +1,31 @@
+plugins {
+    id 'java'
+    id 'org.jetbrains.kotlin.jvm' version '1.4.32'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+
+    implementation group: 'com.squareup.okhttp3', name: 'okhttp', version: '4.9.1'
+    implementation group: 'org.json', name: 'json', version: '20201115'
+    implementation group: 'commons-codec', name: 'commons-codec', version: '1.15'
+    implementation 'com.beust:klaxon:5.5'
+    implementation "com.github.ajalt.clikt:clikt:3.1.0"
+}
+
+test {
+    useJUnitPlatform()
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
