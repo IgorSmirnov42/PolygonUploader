@@ -83,7 +83,7 @@ class ProblemImporter(factory: RequestFactory, id: String, private val rootFolde
 
         val name = problemName(statement[beginProblemIndex])
 
-        if (statement[beginProblemIndex + 1].startsWith("{")) {
+        while (statement[beginProblemIndex + 1].startsWith("{")) {
             ++beginProblemIndex
         }
 
