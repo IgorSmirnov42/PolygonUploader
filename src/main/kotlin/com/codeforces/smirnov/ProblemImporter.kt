@@ -126,7 +126,7 @@ class ProblemImporter(factory: RequestFactory, id: String, private val rootFolde
         if (!statementsDir.exists() || !statementsDir.isDirectory) return null
         return statementsDir
             .listFiles { file -> file.name.endsWith(".tex") }!!
-            .single()
+            .minByOrNull { it.length() }
     }
 
     private fun getChecker(): File? {
