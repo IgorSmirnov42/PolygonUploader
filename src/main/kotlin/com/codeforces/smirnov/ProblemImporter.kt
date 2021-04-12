@@ -3,6 +3,7 @@ package com.codeforces.smirnov
 import com.codeforces.smirnov.api.RequestFactory
 import com.codeforces.smirnov.api.problem.*
 import java.io.File
+import java.io.IOException
 
 class ProblemImporter(factory: RequestFactory, id: String, private val rootFolder: File) {
     private val statementSaver = SaveStatement(factory, id)
@@ -25,7 +26,7 @@ class ProblemImporter(factory: RequestFactory, id: String, private val rootFolde
                 uploadValidator(layout)
                 markSampleTests(layout)
                 break
-            } catch (e: Throwable) {
+            } catch (e: IOException) {
                 e.printStackTrace()
                 continue
             }
@@ -84,7 +85,7 @@ class ProblemImporter(factory: RequestFactory, id: String, private val rootFolde
         val statement = layout.statement?.readLines() ?: return
         val inputFileIndex = statement.withIndex().single { it.value.startsWith("\\InputFile") }.index
         val outputFileIndex = statement.withIndex().single { it.value.startsWith("\\OutputFile") }.index
-        val exampleIndex = statement.withIndex().single { it.value.startsWith("\\Example") }.index
+        val exampleIndex = statement.withIndex().first { it.value.startsWith("\\Example") || it.value.startsWith("\\begin{example}") }.index
         val noteIndex = statement.withIndex().singleOrNull { it.value.startsWith("\\Note") }?.index
         val endProblemIndex = statement.withIndex().single { it.value.startsWith("\\end{problem}") }.index
         var beginProblemIndex = statement.withIndex().single { it.value.startsWith("\\begin{problem}") }.index
