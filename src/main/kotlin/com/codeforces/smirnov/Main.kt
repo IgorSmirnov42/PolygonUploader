@@ -10,8 +10,8 @@ import com.github.ajalt.clikt.parameters.options.option
 import java.io.File
 
 class Main : CliktCommand() {
-    private val key: String = System.getenv("polygon.key")
-    private val secret: String = System.getenv("polygon.secret")
+    private val key: String = System.getenv("polygon_key")
+    private val secret: String = System.getenv("polygon_secret")
     private val problemName: String by argument(name = "Problem name")
     private val pathToProblem: String by argument(name = "Path to problem")
     private val polygonApi: String by option(help = "Polygon api address").default("https://polygon.codeforces.com/api/")

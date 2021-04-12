@@ -1,10 +1,15 @@
 plugins {
     id 'java'
     id 'org.jetbrains.kotlin.jvm' version '1.4.32'
+    id 'application'
 }
 
 group 'org.example'
 version '1.0-SNAPSHOT'
+
+application {
+    mainClass = 'com.codeforces.smirnov.MainKt'
+}
 
 repositories {
     mavenCentral()
