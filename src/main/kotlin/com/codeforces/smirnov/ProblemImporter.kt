@@ -18,8 +18,6 @@ class ProblemImporter(factory: RequestFactory, id: String, private val rootFolde
             try {
                 val layout = generateProblemLayout()
 
-                println(layout)
-
                 uploadTests(layout)
                 uploadSolutions(layout)
                 uploadStatement(layout)
@@ -28,6 +26,7 @@ class ProblemImporter(factory: RequestFactory, id: String, private val rootFolde
                 markSampleTests(layout)
                 break
             } catch (e: Throwable) {
+                e.printStackTrace()
                 continue
             }
         }
