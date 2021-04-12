@@ -152,7 +152,7 @@ class ProblemImporter(factory: RequestFactory, id: String, private val rootFolde
     private fun getTests(): List<Pair<String, List<File>>> {
         val testsDir = File(rootFolder, "tests")
         if (!testsDir.exists() || !testsDir.isDirectory) return emptyList()
-        return testsDir.listFiles()!!
+        val result = testsDir.listFiles()!!
             .map { testSet ->
                 testSet.name to if (!testSet.exists() || !testSet.isDirectory) {
                     emptyList()
@@ -163,6 +163,15 @@ class ProblemImporter(factory: RequestFactory, id: String, private val rootFolde
                 }
             }
             .filter { it.second.isNotEmpty() }
+        return if (result.isEmpty()) {
+            listOf(
+                "tests" to testsDir
+                    .listFiles { file -> file.name.toIntOrNull() != null }!!
+                    .toList()
+            )
+        } else {
+            result
+        }
     }
 
     private data class ProblemLayout(
