@@ -26,7 +26,7 @@ root problem directory
 └───solutions
 │   │
 │   │   [solution-name].cpp
-│   │ ...
+│   │   ...
 │
 └───statement
 │   │
@@ -34,4 +34,10 @@ root problem directory
 ```
 # Run
 
-`./polyloader.sh PROBLEM_NAME PATH_TO_PROBLEM_ROOT_DIRECTORY`
+## Linux
+
+`./polyloader.sh PROBLEM_NAME PATH_TO_PROBLEM_ROOT_DIRECTORY [POLYGON_API_URL]`
+
+## Windows (not tested)
+
+`gradlew.bat run --args="PROBLEM_NAME PATH_TO_PROBLEM_ROOT_DIRECTORY [POLYGON_API_URL]"`
