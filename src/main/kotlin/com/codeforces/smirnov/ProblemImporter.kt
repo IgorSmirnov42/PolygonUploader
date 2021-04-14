@@ -113,7 +113,7 @@ class ProblemImporter(factory: RequestFactory, id: String, private val rootFolde
         require(rootFolder.isDirectory)
 
         return ProblemLayout(
-            statement = getStatement(),
+            statement = listOf("statement", "statements", "statements/russian").mapNotNull { getStatement(it) }.firstOrNull(),
             checker = getChecker(),
             validator = getValidator(),
             solutions = getSolutions(),
@@ -121,8 +121,8 @@ class ProblemImporter(factory: RequestFactory, id: String, private val rootFolde
         )
     }
 
-    private fun getStatement(): File? {
-        val statementsDir = File(rootFolder, "statement")
+    private fun getStatement(statementDir: String): File? {
+        val statementsDir = File(rootFolder, statementDir)
         if (!statementsDir.exists() || !statementsDir.isDirectory) return null
         return statementsDir
             .listFiles { file -> file.name.endsWith(".tex") }!!
